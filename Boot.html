@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="application/json" src ="tsconfig.json"></script>
+    <meta charset="UTF-8">
+    <title>Bot</title>
+</head>
+<h1 > CHAT WITH BOT</h1>
+<body bgcolor="#f0ffff" style = "margin-left:35%" >
+<p id = "question"></p>
+
+<textarea rows="4" cols="50" id = "answer">
+
+</textarea>
+<button onclick="send()"> Send </button>
+
+<script>
+    var response = [],
+        userInfo = {},
+        questionNumber = 0;
+
+    document.addEventListener('DOMContentLoaded',function(){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                response = JSON.parse(this.responseText);
+                drowQuestion();
+            }
+        };
+        xmlhttp.open("GET", "tsconfig.json", true);
+        xmlhttp.send();
+
+
+    });
+    function drowQuestion() {
+        var question =  response.Texts[questionNumber].question;
+        document.getElementById('question').innerHTML = question.replace('NAME',userInfo.name).replace('AGE',userInfo.age)
+                                                                .replace('Proffession',userInfo.proffesion).replace('Money',userInfo.Money);
+        document.getElementById("answer").value = '';
+        questionNumber++;
+    }
+    function storeUserInformation() {
+        var key  = response.Texts[questionNumber-1].key;
+        userInfo[key] = document.getElementById("answer").value;
+        console.log(userInfo)
+    }
+    function send(){
+        if(questionNumber <6 ){
+            storeUserInformation();
+            drowQuestion();
+
+        }
+    }
+</script>
+</body>
+</html>

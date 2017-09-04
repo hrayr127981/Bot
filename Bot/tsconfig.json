@@ -1,0 +1,10 @@
+{
+  "Texts":[
+    {"question":"HI What's your name?","key":"name"},
+    {"question":"how old are you NAME?","key":"age"},
+    {"question":"you are AGE years old,so what is your proffesion?","key":"proffesion"},
+    {"question":"do u like your Proffession ?","key":"Liked"},
+    {"question":"How much money u want to work in our company","key":"Money"},
+    {"question":"I can offer u Money'-10' $","key":"Money"}
+  ]
+}
